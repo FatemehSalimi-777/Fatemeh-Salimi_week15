@@ -1,0 +1,83 @@
+.card {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 18px;
+	padding: 1rem;
+}
+
+.checkboxWrap {
+	display: grid;
+	place-items: center;
+}
+
+.avatar {
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	display: grid;
+	place-items: center;
+	flex-shrink: 0;
+	background: linear-gradient(135deg, #6366f1, #8b5cf6);
+	color: #fff;
+	font-weight: 800;
+}
+
+.info {
+	flex: 1;
+	min-width: 0;
+}
+
+.name {
+	margin: 0 0 0.35rem;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.detail {
+	margin: 0.15rem 0;
+	font-size: 0.88rem;
+	color: #6b7280;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.actions {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.editBtn,
+.deleteBtn {
+	border: none;
+	border-radius: 10px;
+	padding: 0.65rem 0.9rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+	cursor: pointer;
+	font-family: "Vazir", sans-serif;
+}
+
+.editBtn {
+	background: #eef2ff;
+	color: #4f46e5;
+}
+
+.deleteBtn {
+	background: #fee2e2;
+	color: #dc2626;
+}
+
+@media (max-width: 640px) {
+	.card {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.actions {
+		width: 100%;
+	}
+}

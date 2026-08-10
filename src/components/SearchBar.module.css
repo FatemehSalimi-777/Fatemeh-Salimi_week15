@@ -1,0 +1,21 @@
+.wrapper {
+	max-width: 900px;
+	margin: 0 auto 1.5rem;
+}
+
+.input {
+	width: 100%;
+	padding: 0.9rem 1.25rem;
+	font-size: 1rem;
+	font-family: inherit;
+	border: 2px solid #e5e7eb;
+	border-radius: 14px;
+	background: #ffffff;
+	outline: none;
+	transition: all 0.3s ease;
+}
+
+.input:focus {
+	border-color: #6366f1;
+	box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}

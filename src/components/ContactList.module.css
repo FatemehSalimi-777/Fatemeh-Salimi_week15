@@ -1,0 +1,79 @@
+.wrapper {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+.title {
+	margin: 0;
+	font-size: 1.2rem;
+	font-weight: 800;
+}
+
+.count {
+	font-size: 0.85rem;
+	color: #6b7280;
+	background: #f3f4f6;
+	padding: 0.35rem 0.7rem;
+	border-radius: 999px;
+}
+
+.toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	gap: 1rem;
+}
+
+.selectAll {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #374151;
+	font-weight: 600;
+}
+
+.bulkDeleteBtn {
+	border: none;
+	border-radius: 10px;
+	padding: 0.75rem 1rem;
+	font-weight: 700;
+	cursor: pointer;
+	background: #dc2626;
+	color: #fff;
+	font-family: "Vazir", sans-serif;
+}
+
+.list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: 0.9rem;
+}
+
+.emptyState {
+	max-width: 900px;
+	margin: 2rem auto 0;
+	padding: 2rem;
+	text-align: center;
+	background: #fff;
+	border: 1px dashed #d1d5db;
+	border-radius: 18px;
+	color: #6b7280;
+}
+
+@media (max-width: 640px) {
+	.header,
+	.toolbar {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
