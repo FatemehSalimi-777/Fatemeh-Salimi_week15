@@ -4,10 +4,11 @@ import ContactList from "./components/ContactList";
 import SearchBar from "./components/SearchBar";
 import Modal from "./components/Modal";
 import { useToast } from "./components/Toast";
+import { useContacts } from "./context/ContactContext";
 
 function App() {
 	const toast = useToast();
-	const [contacts, setContacts] = useState([]);
+	const { contacts, deleteContact, deleteManyContacts } = useContacts();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedIds, setSelectedIds] = useState([]);
 
@@ -19,24 +20,19 @@ function App() {
 		payload: null,
 	});
 
-	const addContact = (newContact) => {
-		setContacts((prev) => [...prev, { ...newContact, id: Date.now() }]);
-	};
-
-	const updateContact = (updatedContact) => {
-		setContacts((prev) =>
-			prev.map((c) => (c.id === updatedContact.id ? updatedContact : c))
-		);
-		setEditingContact(null);
-	};
-
 	const filteredContacts = useMemo(() => {
-		const term = searchTerm.toLowerCase();
-		return contacts.filter(
-			(c) =>
-				c.name.toLowerCase().includes(term) ||
-				c.email.toLowerCase().includes(term)
-		);
+		const contactList = Array.isArray(contacts) ? contacts : [];
+		const term = searchTerm.trim().toLowerCase();
+
+		return contactList.filter((contact) => {
+			const name = contact.name?.toLowerCase() || "";
+			const email = contact.email?.toLowerCase() || "";
+			const phone = contact.phone?.toLowerCase() || "";
+
+			return (
+				name.includes(term) || email.includes(term) || phone.includes(term)
+			);
+		});
 	}, [contacts, searchTerm]);
 
 	const openSingleDelete = (contact) => {
@@ -47,18 +43,30 @@ function App() {
 		setModal({ isOpen: true, type: "bulk", payload: selectedIds });
 	};
 
-	const confirmDelete = () => {
-		if (modal.type === "single" && modal.payload) {
-			setContacts((prev) => prev.filter((c) => c.id !== modal.payload.id));
-			setSelectedIds((prev) => prev.filter((id) => id !== modal.payload.id));
-			toast.addToast("مخاطب با موفقیت حذف شد!", "success");
+	const confirmDelete = async () => {
+		if (!modal.isOpen) return;
+
+		try {
+			if (modal.type === "single" && modal.payload) {
+				await deleteContact(modal.payload.id);
+
+				setSelectedIds((prev) => prev.filter((id) => id !== modal.payload.id));
+				toast.addToast("مخاطب با موفقیت حذف شد!", "success");
+			} else if (modal.type === "bulk" && selectedIds.length > 0) {
+				await deleteManyContacts(selectedIds);
+
+				setSelectedIds([]);
+				toast.addToast(
+					`${selectedIds.length} مخاطب با موفقیت حذف شدند!`,
+					"success"
+				);
+			}
+		} catch (error) {
+			console.error("Error during deletion:", error);
+			toast.addToast("خطا در حذف مخاطبان!", "error");
+		} finally {
+			setModal({ isOpen: false, type: null, payload: null });
 		}
-		if (modal.type === "bulk") {
-			setContacts((prev) => prev.filter((c) => !selectedIds.includes(c.id)));
-			setSelectedIds([]);
-			toast.addToast("مخاطب ها با موفقیت حذف شدند!", "success");
-		}
-		setModal({ isOpen: false, type: null, payload: null });
 	};
 
 	const toggleSelect = (id) => {
@@ -69,7 +77,8 @@ function App() {
 
 	const toggleSelectAll = (checked) => {
 		if (checked) {
-			setSelectedIds(filteredContacts.map((c) => c.id));
+			const allFilteredIds = filteredContacts.map((c) => c.id);
+			setSelectedIds(allFilteredIds);
 		} else {
 			setSelectedIds([]);
 		}
@@ -91,12 +100,7 @@ function App() {
 				مدیریت مخاطبین
 			</h1>
 
-			<AddContact
-				onAdd={addContact}
-				onUpdate={updateContact}
-				editData={editingContact}
-				onCancel={handleCancelEdit}
-			/>
+			<AddContact editData={editingContact} onCancel={handleCancelEdit} />
 
 			<SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
 

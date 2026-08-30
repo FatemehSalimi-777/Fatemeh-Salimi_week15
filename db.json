@@ -1,0 +1,17 @@
+{
+  "contacts": [
+    {
+      "name": "hhhhfatemeh",
+      "email": "fsalimi777@gmail.com",
+      "phone": "09178667710",
+      "id": "5jcQi-zbHiM"
+    },
+    {
+      "name": "فاطمه سلیمی",
+      "email": "fsalimi777@gmail.com",
+      "phone": "9178667669",
+      "id": "SNzOOwSp83A"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
