@@ -1,16 +1,29 @@
-# React + Vite
+# React Contact Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A robust Contact Management application built with React, demonstrating modern state management, form handling, and CRUD operations.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **CRUD Operations**: Create, Read, Update, and Delete contacts seamlessly.
+- **Form Validation**: Advanced validation using `Yup` and `React Hook Form`.
+- **Search**: Real-time filtering by Name, Email, and Phone.
+- **Bulk Actions**: Select multiple contacts and perform bulk deletions.
+- **State Management**: Centralized data management using React `Context API` and `useReducer`.
+- **API Integration**: Persistence via `JSON Server` with `Axios`.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React (Vite)
+- **Validation**: React Hook Form, Yup
+- **Styling**: Pure CSS
+- **Data Fetching**: Axios
+- **Mock API**: JSON Server
 
-## Expanding the ESLint configuration
+## Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository**
+
+```bash
+   git clone https://github.com/FatemehSalimi-777/Fatemeh-Salimi_week15
+
+```
